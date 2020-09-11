@@ -2,6 +2,7 @@ import React from 'react';
 import NewTapForm from './NewTapForm';
 import TapList from './TapList';
 import TapDetail from './TapDetail';
+import SellPintForm from './SellPintForm'
 
 class TapRoom extends React.Component {
 
@@ -16,7 +17,7 @@ class TapRoom extends React.Component {
   }
 
   handleSellPintClick = () => {
-    this.setState({editing: true});
+    this.setState({updatingPints: true});
   }
 
   handleUpdatingTapVolume = (tapToUpdate) => {
@@ -44,7 +45,8 @@ class TapRoom extends React.Component {
     if(this.state.selectedTap != null){
       this.setState({
         formVisibleOnPage: false,
-        selectedTap: null
+        selectedTap: null,
+        updatingPints: false
       });
     } else {
       this.setState(prevState => ({
@@ -59,16 +61,17 @@ class TapRoom extends React.Component {
 
     if (this.state.updatingPints){
       currentlyVisibleState = <SellPintForm
-        ticket = {this.state.selectedTap}
+        tap = {this.state.selectedTap}
         onUpdatingTapVolume = {this.handleUpdatingTapVolume} />
       buttonText = "Return to Tap List";
     } else if (this.state.selectedTap != null){
-      currentlyVisibleState = <TapDetail tap = {this.state.selectedTap}/>;
+      currentlyVisibleState = <TapDetail 
+      tap = {this.state.selectedTap}
+      onClickingSellPint={this.handleSellPintClick} />;
       buttonText = "Return to Tap List";
     } else if (this.state.formVisibleOnPage){
       currentlyVisibleState = <NewTapForm 
-        onNewTapCreation={this.handleAddingNewTapToList}
-        onClickingSellPint={this.handleSellPintClick} />;
+        onNewTapCreation={this.handleAddingNewTapToList} />
       buttonText = "Return to Tap List";
     } else {
       currentlyVisibleState = <TapList tapList={this.state.masterTapList} onTapSelection={this.handleChangingSelectedTap}/>;

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function TapDetail(props){
-  const {tap, onClickingSellPint} = props;
+  const {tap} = props;
 
   return(
     <React.Fragment>
@@ -12,7 +12,7 @@ function TapDetail(props){
       {tap.price}<br/>
       {tap.flavor}<br/>
       {tap.pints}</h4>
-      <button onClick={()=> onClickingSellPint(ticket.id)}>Did you sell some Kombucha?</button>
+      <button onClick={props.onClickingSellPint(tap.id)}>Did you sell some Kombucha?</button>
     </React.Fragment>
   );
 }
