@@ -23,6 +23,7 @@ function NewTapForm(props){
         <input
           type='number'
           name='price'
+          step="0.01"
           placeholder='Price' />
           <input
           type='text'

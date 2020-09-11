@@ -2,16 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function Tap(props){
+  const floatPrice = parseFloat(props.price).toFixed(2)
   return (
-    <React.Fragment>
-      <div onClick = {() => props.whenTapClicked(props.id)}>
-        <h3>{props.name}</h3>
-        <h4>{props.brand}</h4>
-        <h4>{props.price}</h4>
-        <h4>{props.flavor}</h4>
-        <h4>{props.pints}</h4>
-      </div>
-    </React.Fragment>
+    <div onClick = {() => props.whenTapClicked(props.id)}>
+      <h3>{props.name}</h3>
+      <h4>Kombucha brand: {props.brand}</h4>
+      <h4>Price per pint: ${floatPrice}</h4>
+      <h4>Flavor profile: {props.flavor}</h4>
+      <h4>Pints left in the keg:{props.pints}</h4>
+      <hr/>
+    </div>
   );
 }
 
