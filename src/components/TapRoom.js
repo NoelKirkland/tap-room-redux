@@ -1,8 +1,11 @@
 import React from 'react';
+import NewTapForm from './NewTapForm';
+import TapList from './TapList';
+import TapDetail from './TapDetail';
 
 class TapRoom extends React.Component {
 
-  constructor(){
+  constructor(props){
     super(props);
     this.state = {
       formVisibleOnPage: false,
@@ -46,12 +49,12 @@ class TapRoom extends React.Component {
       buttonText = "Return to Tap List";
     } else {
       currentlyVisibleState = <TapList tapList={this.state.masterTapList} onTapSelection={this.handleChangingSelectedTap}/>;
-      cuttonText = "Add Tap to List";
+      buttonText = "Add Tap to List";
     }
     return(
       <React.Fragment>
         {currentlyVisibleState}
-        <button onClick={this.handlClick}>{buttonText}</button>
+        <button onClick={this.handleClick}>{buttonText}</button>
       </React.Fragment>
     )
   }
