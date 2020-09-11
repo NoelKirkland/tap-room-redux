@@ -11,9 +11,27 @@ class TapRoom extends React.Component {
     };
   }
 
+  handleChangingSelectedTap = (id) => {
+    const selectedTap = this.state.masterTapList.filter(tap => tap.id === id)[0];
+    this.setState({selectedTap: selectedTap});
+  }
+
   handleAddingNewTapToList = (newTap) => {
     const newMasterTapList = this.state.masterTapList.concat(newTap);
     this.setState({masterTapList: newMasterTapList, formVisibleOnPage: false});
+  }
+
+  handleClick = () => {
+    if(this.state.selectedTap != null){
+      this.setState({
+        formVisibleOnPage: false,
+        selectedTap: null
+      });
+    } else {
+      this.setState(prevState => ({
+        formVisibleOnPage: !prevState.formVisibleOnPage,
+      }));
+    }
   }
 
   render(){

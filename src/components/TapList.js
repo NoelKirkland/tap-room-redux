@@ -8,7 +8,7 @@ function TapList(props){
       {props.tapList.map((tap) => 
       <Tap
       whenTapClicked = {props.onTapSelection}
-      names={tap.name}
+      name={tap.name}
       brand={tap.brand}
       price={tap.price}
       flavor={tap.flavor}
