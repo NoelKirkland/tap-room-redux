@@ -10,8 +10,24 @@ class TapRoom extends React.Component {
     this.state = {
       formVisibleOnPage: false,
       masterTapList: [],
-      selectedTap: null
+      selectedTap: null,
+      updatingPints: false
     };
+  }
+
+  handleSellPintClick = () => {
+    this.setState({editing: true});
+  }
+
+  handleUpdatingTapVolume = (tapToUpdate) => {
+    const editedMasterTapLIst = this.state.masterTapList
+      .filter(tap => tap.id !== this.state.selectedTap.id)
+      .concat(tapToUpdate);
+    this.setState({
+      masterTapList: editedMasterTapLIst,
+      updatingPints: false,
+      selectedTap: null
+    });
   }
 
   handleChangingSelectedTap = (id) => {
@@ -41,11 +57,18 @@ class TapRoom extends React.Component {
     let currentlyVisibleState = null;
     let buttonText = null;
 
-    if (this.state.selectedTap != null){
+    if (this.state.updatingPints){
+      currentlyVisibleState = <SellPintForm
+        ticket = {this.state.selectedTap}
+        onUpdatingTapVolume = {this.handleUpdatingTapVolume} />
+      buttonText = "Return to Tap List";
+    } else if (this.state.selectedTap != null){
       currentlyVisibleState = <TapDetail tap = {this.state.selectedTap}/>;
       buttonText = "Return to Tap List";
     } else if (this.state.formVisibleOnPage){
-      currentlyVisibleState = <NewTapForm onNewTapCreation={this.handleAddingNewTapToList}/>;
+      currentlyVisibleState = <NewTapForm 
+        onNewTapCreation={this.handleAddingNewTapToList}
+        onClickingSellPint={this.handleSellPintClick} />;
       buttonText = "Return to Tap List";
     } else {
       currentlyVisibleState = <TapList tapList={this.state.masterTapList} onTapSelection={this.handleChangingSelectedTap}/>;
