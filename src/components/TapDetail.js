@@ -14,7 +14,7 @@ function TapDetail(props){
       <h4>Flavor profile: {tap.flavor}</h4>
       <h4>Pints left in the keg:{tap.pints}</h4>
       <button onClick={() => props.onClickingSoldPint(tap)}>Sell pint</button>
-      <button onClick={() => props.onClickingSoldCustomAmount(tap.id)}>Sell a lot of pints</button>
+      <button onClick={() => props.onClickingSoldCustomAmount(tap)}>Sell a lot of pints</button>
     </React.Fragment>
   );
 }

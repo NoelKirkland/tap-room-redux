@@ -23,6 +23,7 @@ class TapRoom extends React.Component {
       .concat(tapToUpdate);
     this.setState({
       masterTapList: editedMasterTapList,
+      updatingPints: false
     });
   }
 
@@ -75,9 +76,9 @@ class TapRoom extends React.Component {
       buttonText = "Return to Tap List";
     } else if (this.state.selectedTap != null){
       currentlyVisibleState = <TapDetail 
-      tap = {this.state.selectedTap}
-      onClickingSoldCustomAmount={this.handleSellPintClick}
-      onClickingSoldPint = {this.handleSellingPint} />;
+        tap = {this.state.selectedTap}
+        onClickingSoldCustomAmount={this.handleSellPintClick}
+        onClickingSoldPint = {this.handleSellingPint} />;
       buttonText = "Return to Tap List";
     } else if (this.state.formVisibleOnPage){
       currentlyVisibleState = <NewTapForm 
