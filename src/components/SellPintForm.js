@@ -6,7 +6,9 @@ function SellPintForm(props){
 
   function handleSellPintFormSubmission(event){
     event.preventDefault();
-    props.onUpdatingTapVolume({name: tap.name, brand: tap.brand, price: tap.price, falvor: tap.flavor, pints: tap.pints - event.target.pintsSold.value, id: tap.id});
+    if(tap.pints > 0){
+      props.onUpdatingTapVolume({name: tap.name, brand: tap.brand, price: tap.price, falvor: tap.flavor, pints: tap.pints - event.target.pintsSold.value, id: tap.id});
+    }
   }
   return(
     <React.Fragment>

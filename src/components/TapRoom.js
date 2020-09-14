@@ -17,7 +17,9 @@ class TapRoom extends React.Component {
   }
 
   handleSellingPint = (tapToUpdate) => {
-    tapToUpdate.pints--
+    if(tapToUpdate.pints > 0){
+      tapToUpdate.pints--
+    }
     const editedMasterTapList = this.state.masterTapList
       .filter(tap => tap.id !== this.state.selectedTap.id)
       .concat(tapToUpdate);
