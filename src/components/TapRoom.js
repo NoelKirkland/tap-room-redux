@@ -3,7 +3,8 @@ import NewTapForm from './NewTapForm';
 import EditTapForm from './EditTapForm';
 import TapList from './TapList';
 import TapDetail from './TapDetail';
-import SellPintForm from './SellPintForm'
+import SellPintForm from './SellPintForm';
+import { connect } from 'react-redux';
 
 class TapRoom extends React.Component {
 
@@ -135,5 +136,7 @@ class TapRoom extends React.Component {
     )
   }
 }
+
+TapRoom = connect()(TapRoom);
 
 export default TapRoom;
