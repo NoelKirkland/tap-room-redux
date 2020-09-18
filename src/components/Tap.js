@@ -14,9 +14,6 @@ function Tap(props){
 Tap.propTypes = {
   names: PropTypes.string,
   brand: PropTypes.string,
-  price: PropTypes.number,
-  flavor: PropTypes.string,
-  pints: PropTypes.number,
   id: PropTypes.string,
   whenTapClicked: PropTypes.func
 };

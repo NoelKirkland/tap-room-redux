@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function TapDetail(props){
-  const {tap} = props;
+  const {tap, onClickingDelete} = props;
   const floatPrice = parseFloat(tap.price).toFixed(2)
 
   return(
@@ -15,6 +15,7 @@ function TapDetail(props){
       <h4>Pints left in the keg:{tap.pints}</h4>
       <button onClick={() => props.onClickingSoldPint(tap)}>Sell pint</button>
       <button onClick={() => props.onClickingSoldCustomAmount(tap)}>Sell a lot of pints</button>
+      <button onClick={() => onClickingDelete(tap.id)}>Remove this tap</button>
     </React.Fragment>
   );
 }

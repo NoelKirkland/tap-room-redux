@@ -44,6 +44,15 @@ class TapRoom extends React.Component {
     });
   }
 
+  handleDeletingTap = (id) => {
+    const newMasterTapList = this.state.masterTapList
+    .filter(tap => tap.id !== id);
+    this.setState({
+      masterTapList: newMasterTapList,
+      selectedTap: null
+    })
+  }
+
   handleChangingSelectedTap = (id) => {
     const selectedTap = this.state.masterTapList.filter(tap => tap.id === id)[0];
     this.setState({selectedTap: selectedTap});
@@ -81,7 +90,8 @@ class TapRoom extends React.Component {
       currentlyVisibleState = <TapDetail 
         tap = {this.state.selectedTap}
         onClickingSoldCustomAmount={this.handleSellPintClick}
-        onClickingSoldPint = {this.handleSellingPint} />;
+        onClickingSoldPint = {this.handleSellingPint} 
+        onClickingDelete = {this.handleDeletingTap} />;
       buttonText = "Return to Tap List";
     } else if (this.state.formVisibleOnPage){
       currentlyVisibleState = <NewTapForm 
