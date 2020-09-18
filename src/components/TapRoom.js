@@ -5,6 +5,7 @@ import TapList from './TapList';
 import TapDetail from './TapDetail';
 import SellPintForm from './SellPintForm';
 import { connect } from 'react-redux';
+import PropTypes from "prop-types";
 
 class TapRoom extends React.Component {
 
@@ -80,7 +81,7 @@ class TapRoom extends React.Component {
   }
 
   handleChangingSelectedTap = (id) => {
-    const selectedTap = this.state.masterTapList.filter(tap => tap.id === id)[0];
+    const selectedTap = this.props.masterTapList[id];
     this.setState({selectedTap: selectedTap});
   }
 
@@ -143,7 +144,7 @@ class TapRoom extends React.Component {
       buttonText = "Return to Tap List";
     } else {
       currentlyVisibleState = <TapList 
-      tapList={this.state.masterTapList} 
+      tapList={this.props.masterTapList} 
       onTapSelection={this.handleChangingSelectedTap} />;
       buttonText = "Add Tap to List";
     }
@@ -156,6 +157,16 @@ class TapRoom extends React.Component {
   }
 }
 
-TapRoom = connect()(TapRoom);
+TapRoom.propTypes = {
+  masterTapList: PropTypes.object
+};
+
+const mapStateToProps = state => {
+  return {
+    masterTapList: state
+  }
+}
+
+TapRoom = connect(mapStateToProps)(TapRoom);
 
 export default TapRoom;

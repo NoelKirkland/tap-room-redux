@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 function TapList(props){
   return(
     <React.Fragment>
-      {props.tapList.map((tap) => 
+      {Object.values(props.tapList).map((tap) => 
         <Tap
         whenTapClicked = {props.onTapSelection}
         name={tap.name}
@@ -21,7 +21,7 @@ function TapList(props){
 }
 
 TapList.propTypes = {
-  tapList: PropTypes.array,
+  tapList: PropTypes.object,
   onTapSelection: PropTypes.func
 };
 
