@@ -12,7 +12,6 @@ class TapRoom extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      formVisibleOnPage: false,
       selectedTap: null,
       updatingPints: false,
       editing: false
@@ -98,7 +97,6 @@ class TapRoom extends React.Component {
       id: id
     }
     dispatch(action);
-    this.setState({formVisibleOnPage: false});
   }
 
   handleClick = () => {
@@ -110,9 +108,6 @@ class TapRoom extends React.Component {
         editing: false
       });
     } else {
-      this.setState(prevState => ({
-        formVisibleOnPage: !prevState.formVisibleOnPage,
-      }));
     }
   }
 
@@ -163,7 +158,8 @@ TapRoom.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    masterTapList: state
+    masterTapList: state,
+    formVisibleOnPage: state.formVisibleOnPage
   }
 }
 
