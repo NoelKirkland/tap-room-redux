@@ -14,6 +14,7 @@ describe('tapListReducer', () => {
   test('Should secessfully add new tap data to masterTapList', () => {
     const { name, brand, price, flavor, pints, id } = tapData;
     action = {
+      type: 'ADD_TAP',
       name: name,
       brand: brand,
       price: price,
