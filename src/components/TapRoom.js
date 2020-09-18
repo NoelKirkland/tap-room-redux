@@ -61,8 +61,8 @@ class TapRoom extends React.Component {
 
   handleEditingTapInList = (tapToUpdate) => {
     const editedMasterTapList = this.state.masterTapList
-    .filter(tap => tap.id !== this.state.selectedTap.id)
-    .concat(tapToUpdate);
+      .filter(tap => tap.id !== this.state.selectedTap.id)
+      .concat(tapToUpdate);
     this.setState({
       masterTapList: editedMasterTapList,
       selectedTap: tapToUpdate,
