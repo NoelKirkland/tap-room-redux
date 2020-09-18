@@ -39,6 +39,7 @@ class TapRoom extends React.Component {
       .concat(tapToUpdate);
     this.setState({
       masterTapList: editedMasterTapLIst,
+      selectedTap: tapToUpdate,
       updatingPints: false,
     });
   }
