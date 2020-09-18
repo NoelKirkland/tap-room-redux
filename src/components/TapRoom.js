@@ -12,7 +12,6 @@ class TapRoom extends React.Component {
     super(props);
     this.state = {
       formVisibleOnPage: false,
-      masterTapList: [],
       selectedTap: null,
       updatingPints: false,
       editing: false
@@ -48,12 +47,13 @@ class TapRoom extends React.Component {
   }
 
   handleDeletingTap = (id) => {
-    const newMasterTapList = this.state.masterTapList
-    .filter(tap => tap.id !== id);
-    this.setState({
-      masterTapList: newMasterTapList,
-      selectedTap: null
-    })
+    const { dispatch } = this.props;
+    const action = {
+      type: 'DELETE_TAP',
+      id: id
+    }
+    dispatch(action);
+    this.setState({selectedTap: null});
   }
 
   handleEditClick = () => {
@@ -61,13 +61,21 @@ class TapRoom extends React.Component {
   }
 
   handleEditingTapInList = (tapToUpdate) => {
-    const editedMasterTapList = this.state.masterTapList
-      .filter(tap => tap.id !== this.state.selectedTap.id)
-      .concat(tapToUpdate);
+    const { dispatch } = this.props;
+    const { name, brand, price, flavor, pints, id } = tapToUpdate;
+    const action = {
+      type: 'ADD_TAP',
+      name: name,
+      brand: brand,
+      price: price,
+      flavor: flavor,
+      pints: pints,
+      id: id
+    }
+    dispatch(action);
     this.setState({
-      masterTapList: editedMasterTapList,
-      selectedTap: tapToUpdate,
-      editing: false
+      editing: false,
+      selectedTap: tapToUpdate
     })
   }
 
@@ -77,8 +85,19 @@ class TapRoom extends React.Component {
   }
 
   handleAddingNewTapToList = (newTap) => {
-    const newMasterTapList = this.state.masterTapList.concat(newTap);
-    this.setState({masterTapList: newMasterTapList, formVisibleOnPage: false});
+    const { dispatch } = this.props;
+    const { name, brand, price, flavor, id } = newTap;
+    const action = {
+      type: 'ADD_TAP',
+      name: name,
+      brand: brand,
+      price: price,
+      flavor: flavor,
+      pints: 124,
+      id: id
+    }
+    dispatch(action);
+    this.setState({formVisibleOnPage: false});
   }
 
   handleClick = () => {
