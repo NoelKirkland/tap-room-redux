@@ -1,5 +1,6 @@
 import React from 'react';
 import NewTapForm from './NewTapForm';
+import EditTapForm from './EditTapForm';
 import TapList from './TapList';
 import TapDetail from './TapDetail';
 import SellPintForm from './SellPintForm'
@@ -35,11 +36,11 @@ class TapRoom extends React.Component {
   }
 
   handleUpdatingTapVolume = (tapToUpdate) => {
-    const editedMasterTapLIst = this.state.masterTapList
+    const editedMasterTapList = this.state.masterTapList
       .filter(tap => tap.id !== this.state.selectedTap.id)
       .concat(tapToUpdate);
     this.setState({
-      masterTapList: editedMasterTapLIst,
+      masterTapList: editedMasterTapList,
       selectedTap: tapToUpdate,
       updatingPints: false,
     });
@@ -58,9 +59,16 @@ class TapRoom extends React.Component {
     this.setState({editing: true});
   }
 
-  // handleEditingTapInList = (tapToUpdate) => {
-
-  // }
+  handleEditingTapInList = (tapToUpdate) => {
+    const editedMasterTapList = this.state.masterTapList
+    .filter(tap => tap.id !== this.state.selectedTap.id)
+    .concat(tapToUpdate);
+    this.setState({
+      masterTapList: editedMasterTapList,
+      selectedTap: tapToUpdate,
+      editing: false
+    })
+  }
 
   handleChangingSelectedTap = (id) => {
     const selectedTap = this.state.masterTapList.filter(tap => tap.id === id)[0];
@@ -77,7 +85,8 @@ class TapRoom extends React.Component {
       this.setState({
         formVisibleOnPage: false,
         selectedTap: null,
-        updatingPints: false
+        updatingPints: false,
+        editing: false
       });
     } else {
       this.setState(prevState => ({
@@ -90,7 +99,12 @@ class TapRoom extends React.Component {
     let currentlyVisibleState = null;
     let buttonText = null;
 
-    if (this.state.updatingPints){
+    if (this.state.editing){
+      currentlyVisibleState = <EditTapForm
+      tap = {this.state.selectedTap}
+      onEditTap = {this.handleEditingTapInList} />
+      buttonText = "Return to Tap List";
+    } else if (this.state.updatingPints){
       currentlyVisibleState = <SellPintForm
         tap = {this.state.selectedTap}
         onUpdatingTapVolume = {this.handleUpdatingTapVolume} />
